@@ -1,0 +1,33 @@
+<%- include('../partials/header.ejs')%>
+<main>
+    <h2>Check Out Our Event Listings!</h2>
+    <% let eventsFound = false; %>
+    <% categories.forEach(category => { %>
+        <% const categoryEvents = events.filter(event => event.category === category); %>
+        <% if (categoryEvents.length > 0) { %>
+            <% eventsFound = true; %>
+            <button class="accordion">
+                <%= category %>
+            </button>
+            <div class="panel">
+                <nav class="events_nav">
+                    <ul> <!-- Add a <ul> element for the list of events -->
+                        <% categoryEvents.forEach(event => { %>
+                            <li class="event_titles">
+                                <a href="/events/<%= event.id %>" class="event-option" style="text-decoration: none; color: black;">
+                                    <%= event.title %>
+                                </a>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </nav>
+            </div>
+        <% } %>
+    <% }); %>
+
+    <!-- Display a message if no events are found in any category -->
+    <% if (!eventsFound) { %>
+        <p>No events currently scheduled...</p>
+    <% } %>
+</main>
+<%- include('../partials/footer.ejs') %>

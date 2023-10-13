@@ -1,0 +1,46 @@
+<%- include('../partials/header.ejs')%>
+<main>
+    <form class="main-form" enctype="multipart/form-data" method='POST' action="/events/<%= event.id %>?_method=PUT">
+        <!-- Category selection form -->
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+            <option value="Warhammer 40K">Warhammer 40K</option>
+            <option value="Warhammer Fantasy">Warhammer Fantasy</option>
+            <option value="Meet and Chill">Meet and Chill</option>
+            <option value="Painting Session">Painting Session</option>
+            <option value="Other">Other</option>
+        </select>
+        
+        <!-- Title input form -->
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Ex. Orks Vs. Dark Eldar" required>
+
+        <!-- Host name input form -->
+        <label for="host-name">Name</label>
+        <input type="text" id="host-name" name="hostName" placeholder="Enter your name here!" required>
+        
+        <!-- Event details form -->
+        <label for="event-details">Details</label>
+        <textarea id="event-details" name="details" placeholder="Enter your event details here!" required></textarea>
+        
+        <!-- Location input form -->
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Ex. Woodward Hall, Room 134" required>
+        
+        <!-- Start date and time form -->
+        <label for="start-datetime">Start</label>
+        <input type="datetime-local" id="start-datetime" name="startDateTime" required>
+        
+        <!-- End date and time form -->
+        <label for="end-datetime">End</label>
+        <input type="datetime-local" id="end-datetime" name="endDateTime" required>
+        
+        <!-- Image upload form -->
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        
+        <!-- Submission button -->
+        <button type="submit">Submit</button>
+    </form>
+</main>
+<%- include('../partials/footer.ejs')%>

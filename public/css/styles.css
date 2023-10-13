@@ -1,0 +1,390 @@
+/* ----------------------------------------Body Section-------------------------------------------- */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ----------------------------------------Header Section-------------------------------------------- */
+
+header {
+    background-color: black;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-divider {
+    width: 100%;
+    height: 1px;
+    background-color: gold;
+}
+
+/* ----------------------------------------Logo Section-------------------------------------------- */
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+}
+
+.logo img {
+    width: 20%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* ----------------------------------------User Nav Bar-------------------------------------------- */
+
+.user_nav {
+    display: flex;
+    align-items: center;
+}
+
+.user_nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    text-align: center;
+}
+
+.user_nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.user_nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.user_nav ul li a:hover {
+    color: gold;
+}
+
+/* ----------------------------------------General Nav Bar------------------------------------------ */
+
+.general_nav {
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.general_nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.general_nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.general_nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.general_nav ul li a:hover {
+    color: gold
+}
+
+/* ----------------------------------------Main Section-------------------------------------------- */
+
+main {
+    flex: 1;
+    padding: 80px;
+    text-align: center;
+}
+
+/* ----------------------------------------Footer Section------------------------------------------- */
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* ----------------------------------------Footer Nav Bar-------------------------------------------- */
+
+.footer_nav {
+    background-color: black;
+    color: white;
+    text-align: center;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.footer_nav ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.footer_nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer_nav ul li a:hover {
+    color: gold;
+}
+
+/*-------------------------------------Accordion on events page------------------------------------*/
+
+.accordion {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 10px;
+}
+  
+.active, .accordion:hover {
+    background-color: rgb(218, 187, 16);
+}
+  
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    color: black;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    text-align: left;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.event-option a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+}
+
+.event-option a:hover {
+    color: gold;
+}
+
+/*---------------------------------------Events Nav Bar---------------------------------------------*/
+
+.events_nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.events_nav ul li {
+    margin-bottom: 10px;
+}
+
+.events_nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.events_nav ul li a:hover {
+    color: gold;
+}
+
+/*---------------------------------------Event Information Page-------------------------------------*/
+
+.event-card {
+    background-color: gold;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.566);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.event_image {
+    text-align: center;
+}
+
+.event_image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.center-flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.event_details_list {
+    list-style: none;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.event_details_list li {
+    margin: 10px 0;
+}
+
+.event_details_list li strong {
+    display: inline-block;
+    width: 120px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/*------------------------------Styling the edit and delete event buttons----------------------------*/
+
+.card-buttons {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.edit-button,
+.delete-button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.edit-button i,
+.delete-button i {
+    margin-right: 5px;
+}
+
+.edit-button + .delete-button {
+    margin-left: 10px;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+    background-color: rgba(0, 0, 0, 0.648);
+}
+
+
+/*--------------------------------------New Event page Formatting------------------------------------*/
+
+.main-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.566);
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: gold;
+}
+
+.main-form label {
+    margin-bottom: 10px;
+}
+
+.main-form input[type="file"] {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+}
+
+.main-form input[type="text"],
+.main-form textarea,
+.main-form select,
+.main-form input[type="datetime-local"],
+.main-form input[type="file"] {
+    width: calc(100% - 40px);
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.main-form button[type="submit"] {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 auto;
+    display: block;
+}
+
+.main-form button[type="submit"]:hover {
+    background-color: rgba(0, 0, 0, 0.648);
+}
+
+/***************************************Contact Page Formatting*************************************/
+
+.contact_list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact_list li a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+    border-bottom: 2px solid transparent;
+    border-bottom-color: gold;
+}
+
+.contact_list li a:hover {
+    color: gold;
+}
+
+/***************************************About Page Formatting***************************************/
+
+.about_us_formatting {
+    list-style: none;
+    padding: 0;
+    margin-left: 0;
+}
+
+.about_us_formatting li {
+    margin-bottom: 10px;
+}
+
+.about_us_formatting li a {
+    text-decoration: none;
+    color: gold;
+}
+
+.about_us_formatting li a:hover {
+    color: black;
+}
