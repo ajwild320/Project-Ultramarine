@@ -4,36 +4,37 @@
         <!-- Category selection form -->
         <label for="category">Category</label>
         <select id="category" name="category" required>
-            <option value="Warhammer 40K">Warhammer 40K</option>
-            <option value="Warhammer Fantasy">Warhammer Fantasy</option>
-            <option value="Meet and Chill">Meet and Chill</option>
-            <option value="Painting Session">Painting Session</option>
-            <option value="Other">Other</option>
+            <option value="Warhammer 40K" <%= event.category === "Warhammer 40K" ? "selected" : "" %>>Warhammer 40K</option>
+            <option value="Warhammer Fantasy" <%= event.category === "Warhammer Fantasy" ? "selected" : "" %>>Warhammer Fantasy</option>
+            <option value="Meet and Chill" <%= event.category === "Meet and Chill" ? "selected" : "" %>>Meet and Chill</option>
+            <option value="Painting Session" <%= event.category === "Painting Session" ? "selected" : "" %>>Painting Session</option>
+            <option value="Other" <%= event.category === "Other" ? "selected" : "" %>>Other</option>
+            <option value="Warhammer 30K" <%= event.category === "Warhammer 30K" ? "selected" : "" %>>Warhammer 30K</option>
         </select>
         
         <!-- Title input form -->
         <label for="title">Title</label>
-        <input type="text" id="title" name="title" placeholder="Ex. Orks Vs. Dark Eldar" required>
+        <input type="text" id="title" name="title" placeholder="Ex. Orks Vs. Dark Eldar" required value="<%= event.title %>">
 
         <!-- Host name input form -->
         <label for="host-name">Name</label>
-        <input type="text" id="host-name" name="hostName" placeholder="Enter your name here!" required>
+        <input type="text" id="host-name" name="hostName" placeholder="Enter your name here!" required value="<%= event.hostName %>">
         
         <!-- Event details form -->
         <label for="event-details">Details</label>
-        <textarea id="event-details" name="details" placeholder="Enter your event details here!" required></textarea>
+        <textarea id="event-details" name="details" placeholder="Enter your event details here!"  minlength="10" required><%= event.details %></textarea>
         
         <!-- Location input form -->
         <label for="location">Location</label>
-        <input type="text" id="location" name="location" placeholder="Ex. Woodward Hall, Room 134" required>
+        <input type="text" id="location" name="location" placeholder="Ex. Woodward Hall, Room 134" required value="<%= event.location %>">
         
         <!-- Start date and time form -->
         <label for="start-datetime">Start</label>
-        <input type="datetime-local" id="start-datetime" name="startDateTime" required>
+        <input type="datetime-local" id="start-datetime" name="startDateTime" required value="<%= event.startDateTime.toISOString().slice(0, 16) %>">
         
         <!-- End date and time form -->
         <label for="end-datetime">End</label>
-        <input type="datetime-local" id="end-datetime" name="endDateTime" required>
+        <input type="datetime-local" id="end-datetime" name="endDateTime" required value="<%= event.endDateTime.toISOString().slice(0, 16) %>">
         
         <!-- Image upload form -->
         <label for="image">Image</label>

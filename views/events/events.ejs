@@ -11,10 +11,11 @@
             </button>
             <div class="panel">
                 <nav class="events_nav">
-                    <ul> <!-- Add a <ul> element for the list of events -->
+                    <ul>
                         <% categoryEvents.forEach(event => { %>
                             <li class="event_titles">
-                                <a href="/events/<%= event.id %>" class="event-option" style="text-decoration: none; color: black;">
+                                <a href="/events/<%= event.id %>" style="text-decoration: none; color: black;" onmouseover="this.style.color='gold';" onmouseout="this.style.color='black';">
+    
                                     <%= event.title %>
                                 </a>
                             </li>

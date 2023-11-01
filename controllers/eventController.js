@@ -1,82 +1,119 @@
-const model = require('../models/event');
-const {fileUpload} = require('../middleware/fileUpload');
+const myModule = require("../models/event");
+const Event = myModule.Event;
+const categories = [
+  "Warhammer 40K",
+  "Warhammer Fantasy",
+  "Meet and Chill",
+  "Painting Session",
+  "Warhammer 30K",
+  "Other",
+];
 
 // get /events: send all events
 exports.index = (req, res) => {
-    let events = model.find();
-    let categories = model.obtainCategories();
-    res.render('./events/events', { 
-        events: events, 
-        categories: categories
-     });
+  Event.find()
+    .then((events) => {
+      res.render("./events/events", {
+        events: events,
+        categories: categories,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // get /events/new: send form for creating a new event
 exports.new = (req, res) => {
-    res.render('./events/newEvent');
+  res.render("./events/newEvent");
 };
 
 // post /events: create a new event
-exports.create = (req, res) => {
-    let formBody = req.body;
-    const image = req.file;
-    let event = {
-        category: formBody.category,
-        title: formBody.title,
-        hostName: formBody.hostName,
-        startDateTime: formBody.startDateTime,
-        endDateTime: formBody.endDateTime,
-        location: formBody.location,
-        details: formBody.details,
-    }
-    event.image = req.file.filename;
-    model.save(event);
-    res.redirect('/events');
+exports.create = (req, res, next) => {
+  const formBody = new Event(req.body);
+  formBody.image = req.file.filename;
+  formBody
+    .save()
+    .then((event) => {
+      res.redirect("/events");
+    })
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // get /events/:id: send event details of event with given id
-exports.show = (req, res) => {
-    let id = req.params.id;
-    let event = model.findById(id);
-    res.render('./events/event', { event });
+exports.show = (req, res, next) => {
+  const id = req.params.id;
+
+  Event.findById(id)
+    .then((event) => {
+      if (event) {
+        res.render("./events/event", {
+          event,
+          formatDate: (date) => date.toLocaleString(),
+        });
+      } else {
+        const err = new Error("Cannot find event with ID: " + id);
+        err.status = 404;
+        next(err);
+      }
+    })
+    .catch((err) => next(err));
 };
 
 // get /events/:id/edit: send form for editing event with given id
-exports.edit = (req, res) => {
-    let id = req.params.id;
-    let event = model.findById(id);
-    if (event){
-        res.render('./events/edit', { event })
-    } else {
-        let err = new Error('Cannot find event with ID ' + id);
+exports.edit = (req, res, next) => {
+  const id = req.params.id;
+  Event.findById(id)
+    .then((event) => {
+      if (event) {
+        res.render("./events/edit", { event });
+      } else {
+        const err = new Error("Cannot find event with ID " + id);
         err.status = 404;
         next(err);
-    }
+      }
+    })
+    .catch((error) => {
+      console.error("Error in edit:", error);
+      res.status(500).send("Internal Server Error");
+    });
 };
 
 // put /events/:id: update event with given id
 exports.update = (req, res, next) => {
-    let event = req.body;
-    let image = req.file.filename; 
-    let id = req.params.id;
-    if (model.updateById(id, event, image)){ 
+  const event = req.body;
+  const image = req.file.filename;
+  const id = req.params.id;
+
+  Event.findByIdAndUpdate(id, { ...event, image }, { new: true })
+    .then((updatedEvent) => {
+      if (updatedEvent) {
         console.log(event);
-        res.redirect('/events/'+id);
-    } else {
-        let err = new Error('Cannot find event with ID ' + id);
+        res.redirect("/events/" + id);
+      } else {
+        const err = new Error("Cannot find event with ID " + id);
         err.status = 404;
         next(err);
-    }
+      }
+    })
+    .catch((error) => {
+      console.error("Error in update:", error);
+      res.status(500).send("Internal Server Error");
+    });
 };
 
 // delete /events/:id: delete event with given id
-exports.delete = (req, res) => {
-    let id = req.params.id;
-    if (model.deleteByID(id)){
-        res.redirect('/events');
-    } else {
-        let err = new Error('Cannot find event with ID ' + id);
-        err.status = 404;
-        next(err);
-    }
+exports.delete = (req, res, next) => {
+  const id = req.params.id;
+
+  Event.findByIdAndDelete(id)
+    .then((event) => {
+      res.redirect("/events");
+    })
+    .catch((error) => {
+      console.error("Error in delete:", error);
+      res.status(500).send("Internal Server Error");
+    });
 };

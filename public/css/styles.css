@@ -250,7 +250,9 @@ footer {
 }
 
 .event_details_list li {
-    margin: 10px 0;
+    display: flex;
+    margin: 15px 0;
+    align-items: left;
 }
 
 .event_details_list li strong {
@@ -387,4 +389,38 @@ footer {
 
 .about_us_formatting li a:hover {
     color: black;
+}
+
+/*---------------------------------------Error Page Formatting---------------------------------------------*/
+
+.content {
+    background-color: black;
+    border: 1px solid gold;
+    color: gold;
+    border-radius: 5px;
+    padding: 5rem;
+    margin: 4rem;
+    text-align: center;
+    box-shadow: 0 0 5px gold;
+}
+
+/*---------------------------------------Scroll Bar Styling---------------------------------------------*/
+
+/* For WebKit-based browsers - (Chrome) */
+::-webkit-scrollbar {
+    width: 15px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: gold;
+    border-radius: 6px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: black;
+}
+  
+::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 6px;
 }

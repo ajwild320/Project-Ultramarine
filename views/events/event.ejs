@@ -3,15 +3,15 @@
     <div class="event-card">
         <h2><%= event.title %></h2>
         <div class="event_image">
-            <!--Fix image linking-->
             <img src="/images/<%= event.image %>" alt="Combat">
         </div>
         <div class="center-flex-container">
             <ul class="event_details_list">
                 <li><strong>Host:</strong> <%= event.hostName %></li>
-                <li><strong>Date and Time:</strong> <%= event.startDateTime %> to <%= event.endDateTime %></li>
+                <li><strong>Start Date:</strong> <%= formatDate(event.startDateTime) %></li>
+                <li><strong>End Date:</strong> <%= formatDate(event.endDateTime) %></li>
                 <li><strong>Location:</strong> <%= event.location %></li>
-                <li><strong>Details:</strong> <%= event.details %></li>
+                <li class="stubborn_Pain"><strong>Details:</strong> <%= event.details %></li>
             </ul>
         </div>
         <div class="card-buttons">
