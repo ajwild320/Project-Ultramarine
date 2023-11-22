@@ -20,8 +20,13 @@
             <nav class="user_nav">
                 <ul>
                     <li><a href="events/newEvent">New Event</a></li>
-                    <li><a href="">Sign Up</a></li>
-                    <li><a href="">Login</a></li>
+                    <% if(!user){ %>
+                        <li><a href='/users/new'>Sign Up</a></li>
+                        <li><a href='/users/login'>Login</a></li>
+                    <% } else { %>
+                        <li><a href='/users/profile'>Profile</a></li>
+                        <li><a href='/users/logout'>Logout</a></li>
+                    <% } %>
                 </ul>
             </nav>
         </header>
@@ -33,3 +38,20 @@
             </ul>
         </nav>
     </div>
+
+    <% if(errorMessages.length > 0) {%>
+        <% errorMessages.forEach(message=>{%>
+            <div class='error'>
+                <%=message%>
+            </div>
+            <%});%>
+                <%}%>
+    
+                    <% if(successMessages.length > 0) {%>
+    
+                        <% successMessages.forEach(message=>{%>
+                            <div class='success'>
+                                <%=message%>
+                            </div>
+                            <%});%>
+                                <%}%>

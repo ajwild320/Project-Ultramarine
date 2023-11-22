@@ -424,3 +424,153 @@ footer {
     background: white;
     border-radius: 6px;
 }
+
+/*---------------------------------------Login page Styling---------------------------------------------*/
+
+.loginHeader {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.loginForm {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: gold;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    margin-bottom: 80px;
+}
+
+.loginForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.loginForm input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.loginForm input[type="submit"] {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.loginForm input[type="submit"]:hover {
+    background-color: rgba(0, 0, 0, 0.648);
+}
+
+
+/*---------------------------------------New User page Styling---------------------------------------------*/
+
+
+.newUserForm {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: gold;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 80px;
+}
+
+.newUserForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.newUserForm input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.newUserForm input[type="submit"] {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.newUserForm input[type="submit"]:hover {
+    background-color: #333;
+}
+
+
+/*---------------------------------------Profile Page Styling---------------------------------------------*/
+
+.profileHeader1 {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.profileHeader2 {
+    text-align: center;
+}
+
+.accordion-container {
+    padding-top: 10px;
+    padding-bottom: 60px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.no_profile_events {
+    color: gold;
+    text-align: center;
+}
+
+.boxy {
+    background-color: black;
+    border: 1px solid gold;
+    color: gold;
+    border-radius: 5px;
+    padding: 5rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 6rem;
+    text-align: center;
+    box-shadow: 0 0 5px gold;
+}
+
+/*---------------------------------------Flash Message Styling---------------------------------------------*/
+
+.success {
+    background: rgba(108, 192, 112, 0.7);
+    border-radius: 8px;
+    color: #fff;
+    width: 80%;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+    padding: 0.5rem 0;
+    margin-top: 20px;
+  }
+  
+  .error {
+    background: rgba(255, 102, 51, 0.7);
+    border-radius: 8px;
+    color: #fff;
+    width: 80%;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+    padding: 0.5rem 0;
+    margin-top: 20px;
+  }

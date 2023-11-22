@@ -1,7 +1,10 @@
 <%- include('../partials/header.ejs')%>
-<main>
-    <h2>Check Out Our Event Listings!</h2>
-    <% let eventsFound = false; %>
+
+<h2 class="profileHeader1">Welcome, <%=user.firstName%></h2>
+
+<h2 class="profileHeader2">Here are your Event Listings!</h2>
+<div class="accordion-container">
+<% let eventsFound = false; %>
     <% categories.forEach(category => { %>
         <% const categoryEvents = events.filter(event => event.category === category); %>
         <% if (categoryEvents.length > 0) { %>
@@ -25,13 +28,13 @@
             </div>
         <% } %>
     <% }); %>
+</div>
 
     <!-- Display a message if no events are found in any category -->
-    
         <% if (!eventsFound) { %>
             <div class="boxy">
                 <h3 class="no_profile_events">No events currently scheduled...</h3>
             </div>
         <% } %>
-</main>
-<%- include('../partials/footer.ejs') %>
+
+<%- include('../partials/footer.ejs')%>

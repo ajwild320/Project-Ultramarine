@@ -37,6 +37,11 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Image is required'],
   },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'Author is required'],
+  }
 }, { timestamps: true });
 
 exports.obtainCategories = async () => {

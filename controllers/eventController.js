@@ -32,13 +32,14 @@ exports.new = (req, res) => {
 exports.create = (req, res, next) => {
   const formBody = new Event(req.body);
   formBody.image = req.file.filename;
-  formBody
-    .save()
-    .then((event) => {
-      res.redirect("/events");
-    })
-    .catch((err) => {
-      next(err);
+  formBody.author = req.session.user;
+  formBody.save()
+  .then((event) => res.redirect('/events'))
+    .catch(err=>{
+        if(err.name === 'ValidationError' ) {
+            err.status = 400;
+        }
+        next(err);
     });
 };
 
@@ -46,7 +47,7 @@ exports.create = (req, res, next) => {
 exports.show = (req, res, next) => {
   const id = req.params.id;
 
-  Event.findById(id)
+  Event.findById(id).populate('author', 'firstName lastName')
     .then((event) => {
       if (event) {
         res.render("./events/event", {
@@ -87,7 +88,7 @@ exports.update = (req, res, next) => {
   const image = req.file.filename;
   const id = req.params.id;
 
-  Event.findByIdAndUpdate(id, { ...event, image }, { new: true })
+  Event.findByIdAndUpdate(id, { ...event, image }, { new: true, useFindAndModify: false, runValidators: true })
     .then((updatedEvent) => {
       if (updatedEvent) {
         console.log(event);
@@ -98,9 +99,10 @@ exports.update = (req, res, next) => {
         next(err);
       }
     })
-    .catch((error) => {
-      console.error("Error in update:", error);
-      res.status(500).send("Internal Server Error");
+    .catch((err) => {
+      if(err.name === 'ValidationError')
+            err.status = 400;
+        next(err);
     });
 };
 
@@ -108,7 +110,7 @@ exports.update = (req, res, next) => {
 exports.delete = (req, res, next) => {
   const id = req.params.id;
 
-  Event.findByIdAndDelete(id)
+  Event.findByIdAndDelete(id, {useFindAndModify: false})
     .then((event) => {
       res.redirect("/events");
     })

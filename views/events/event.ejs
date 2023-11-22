@@ -14,6 +14,7 @@
                 <li class="stubborn_Pain"><strong>Details:</strong> <%= event.details %></li>
             </ul>
         </div>
+        <% if(user == event.author._id) { %>
         <div class="card-buttons">
             <form action="/events/<%= event.id %>" method="POST">
                 <button type="submit" formmethod="GET" formaction="/events/<%= event.id %>/edit" class="edit-button">
@@ -24,6 +25,7 @@
                 </button>
             </form>
         </div>
+        <% } %>
     </div>
 </main>
 <%- include('../partials/footer.ejs')%>
