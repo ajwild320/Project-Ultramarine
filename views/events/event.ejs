@@ -1,6 +1,16 @@
 <%- include('../partials/header.ejs')%>
 <main>
     <div class="event-card">
+
+        <div class="card-buttons">
+            <form method="POST" action="/events/<%= event.id %>/rsvp">
+                <button type="submit" name="status" value="YES" <% if (userRsvp && userRsvp.status === 'YES') { %>disabled<% } %>>RSVP Yes</button>
+                <button type="submit" name="status" value="NO" <% if (userRsvp && userRsvp.status === 'NO') { %>disabled<% } %>>RSVP No</button>
+                <button type="submit" name="status" value="MAYBE" <% if (userRsvp && userRsvp.status === 'MAYBE') { %>disabled<% } %>>RSVP Maybe</button>
+            </form>
+            <p>Total RSVPs: <%= rsvps.filter(rsvp => rsvp.status === 'YES').length %></p>
+        </div>
+
         <h2><%= event.title %></h2>
         <div class="event_image">
             <img src="/images/<%= event.image %>" alt="Combat">

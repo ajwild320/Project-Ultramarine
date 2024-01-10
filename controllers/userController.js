@@ -1,5 +1,6 @@
 const model = require('../models/user');
 const myModule = require("../models/event");
+const RSVP = require("../models/rsvp");
 const Event = myModule.Event;
 const categories = [
   "Warhammer 40K",
@@ -18,7 +19,10 @@ exports.create = (req, res, next) => {
   let user = new model(req.body);
   user
     .save()
-    .then((user) => res.redirect("/users/login"))
+    .then((user) => {
+      req.flash("success", "Signup successful! You can now log in.");
+      res.redirect("/users/login");
+    })
     .catch((err) => {
       if (err.name === "ValidationError") {
         req.flash("error", err.message);
@@ -63,39 +67,43 @@ exports.login = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-exports.profile = (req, res, next) => {
+exports.profile = async (req, res, next) => {
   const userId = req.session.user;
   let User = model;
 
-  // Fetch the user to get their events
-  User.findById(userId)
-    .then((user) => {
-      if (!user) {
-        // Handle the case where the user is not found
-        return res.status(404).send('User not found');
-      }
+  try {
+    // Fetch the user to get their events
+    const user = await User.findById(userId);
 
-      // Now, fetch events for the specific user
-      return Event.find({ author: userId }).then((events) => ({ user, events }));
-    })
-    .then(({ user, events }) => {
-      res.render('./user/profile', {
-        user: user,
-        events: events,
-        categories: categories,
-      });
-    })
-    .catch((err) => {
-      next(err);
+    if (!user) {
+      // Handle the case where the user is not found
+      return res.status(404).send('User not found');
+    }
+
+    // Fetch events for the specific user
+    const events = await Event.find({ author: userId });
+
+    // Fetch RSVPs for the user
+    const rsvps = await RSVP.find({ user: userId });
+
+    res.render('./user/profile', {
+      user: user,
+      events: events,
+      rsvps: rsvps,
+      categories: categories,
     });
+  } catch (err) {
+    next(err);
+  }
 };
 
 
 exports.logout = (req, res, next)=>{
     req.session.destroy(err=>{
-        if(err) 
+        if(err) {
            return next(err);
-       else
+        } else {
             res.redirect('/');  
+        }
     });
 };

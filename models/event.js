@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = require('mongoose').Schema;
+const RSVP = require('./rsvp');
+const validator = require('validator');
 
 // Defining the Event schema
 const eventSchema = new mongoose.Schema({
@@ -23,10 +25,26 @@ const eventSchema = new mongoose.Schema({
   startDateTime: {
     type: Date,
     required: [true, 'Start time is required'],
+    validate: {
+      validator: function (value) {
+        // Convert Date object to string before validation
+        return validator.isISO8601(value.toISOString());
+      },
+      message: 'Invalid startDateTime format',
+    },
   },
   endDateTime: {
     type: Date,
     required: [true, 'End time is required'],
+    validate: [
+      {
+        validator: function (value) {
+          // Convert Date object to string before validation
+          return validator.isISO8601(value.toISOString());
+        },
+        message: 'Invalid endDateTime format',
+      },
+    ],
   },
   details: {
     type: String,
@@ -41,7 +59,8 @@ const eventSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'Author is required'],
-  }
+  },
+  rsvps: [RSVP.schema],
 }, { timestamps: true });
 
 exports.obtainCategories = async () => {

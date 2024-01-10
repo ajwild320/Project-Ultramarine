@@ -4,37 +4,54 @@
 
 <h2 class="profileHeader2">Here are your Event Listings!</h2>
 <div class="accordion-container">
-<% let eventsFound = false; %>
-    <% categories.forEach(category => { %>
-        <% const categoryEvents = events.filter(event => event.category === category); %>
-        <% if (categoryEvents.length > 0) { %>
-            <% eventsFound = true; %>
-            <button class="accordion">
-                <%= category %>
-            </button>
-            <div class="panel">
-                <nav class="events_nav">
-                    <ul>
-                        <% categoryEvents.forEach(event => { %>
-                            <li class="event_titles">
-                                <a href="/events/<%= event.id %>" style="text-decoration: none; color: black;" onmouseover="this.style.color='gold';" onmouseout="this.style.color='black';">
-    
-                                    <%= event.title %>
-                                </a>
-                            </li>
-                        <% }); %>
-                    </ul>
-                </nav>
-            </div>
-        <% } %>
-    <% }); %>
+  <% let eventsFound = false; %>
+  <% categories.forEach(category => { %>
+    <% const categoryEvents = events.filter(event => event.category === category); %>
+    <% if (categoryEvents.length > 0) { %>
+      <% eventsFound = true; %>
+      <button class="accordion">
+        <%= category %>
+      </button>
+      <div class="panel">
+        <nav class="events_nav">
+          <ul>
+            <% categoryEvents.forEach(event => { %>
+              <li class="event_titles">
+                <a href="/events/<%= event.id %>" style="text-decoration: none; color: black;" onmouseover="this.style.color='gold';" onmouseout="this.style.color='black';">
+                  <%= event.title %>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </nav>
+      </div>
+    <% } %>
+  <% }); %>
 </div>
 
-    <!-- Display a message if no events are found in any category -->
-        <% if (!eventsFound) { %>
-            <div class="boxy">
-                <h3 class="no_profile_events">No events currently scheduled...</h3>
-            </div>
-        <% } %>
+<!-- Display a message if no events are found in any category -->
+<% if (!eventsFound) { %>
+  <div class="boxy">
+    <h3 class="no_profile_events">No events currently scheduled...</h3>
+  </div>
+<% } %>
+
+<!-- Display a separate list of events user has RSVP'd to -->
+<div class="rsvp-container">
+    <h2 class="profileHeader2">Your RSVPs:</h2>
+    <% if (rsvps.length > 0) { %>
+        <ul>
+            <% rsvps.forEach(rsvp => { %>
+                <li>
+                    <a href="/events/<%= rsvp.event.toString() %>">
+                        <%= rsvp.event.title %> - Your RSVP: <%= rsvp.status %>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p class="profileHeader2">You haven't RSVP'd to any events yet.</p>
+    <% } %>
+</div>
 
 <%- include('../partials/footer.ejs')%>

@@ -1,7 +1,7 @@
 const express = require('express');
 const myEventController = require('../controllers/eventController');
 const {fileUpload} = require('../middleware/fileUpload');
-const {validateId} = require('../middleware/validator');
+const {validateId, validateEvent, validateResult} = require('../middleware/validator');
 const {isLoggedIn, isAuthor} = require('../middleware/auth');
 
 const router = express.Router();
@@ -13,7 +13,7 @@ router.get('/', myEventController.index);
 router.get('/newEvent', isLoggedIn, myEventController.new);
 
 // post /events: create a new event
-router.post('/', isLoggedIn, fileUpload, myEventController.create);
+router.post('/', isLoggedIn, fileUpload, validateEvent, validateResult, myEventController.create);
 
 // get /events/:id: send event details of event with given id
 router.get('/:id', validateId, myEventController.show);
@@ -22,9 +22,12 @@ router.get('/:id', validateId, myEventController.show);
 router.get('/:id/edit', isLoggedIn, validateId, isAuthor, myEventController.edit);
 
 // put /events/:id: update event with given id
-router.put('/:id', isLoggedIn, validateId, isAuthor, fileUpload, myEventController.update);
+router.put('/:id', isLoggedIn, validateId, isAuthor, fileUpload, validateEvent, validateResult, myEventController.update);
 
 // delete /events/:id: delete event with given id
 router.delete('/:id', isLoggedIn, validateId, isAuthor, myEventController.delete);
+
+// Add the new route for handling RSVP directly on the event detail page
+router.post('/:id/rsvp', isLoggedIn, myEventController.handleRsvp);
 
 module.exports = router;
